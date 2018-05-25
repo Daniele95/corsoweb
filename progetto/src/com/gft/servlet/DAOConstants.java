@@ -6,6 +6,7 @@ public interface DAOConstants {
 	// Libraries (ho messo il driver sotto webContent/WEB-INF\lib
 	// se scrivo male il percorso avrò ClassNotFoundExc.
 	String JDBC_DRIVER = "oracle.jdbc.driver.OracleDriver";
+	// url = ip:portaDB:nomeDatabase
 	String JDBC_URL = "jdbc:oracle:thin:@192.168.18.117:1521:ORCL";
 	String USERNAME = "a1";
 	String PASSWORD = "pass";
