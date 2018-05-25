@@ -13,3 +13,4 @@ public interface DAOConstants {
 	
 	String SELECT_UTENTE = "select nome, cognome, username from utente";
 }
+
