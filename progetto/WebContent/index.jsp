@@ -18,7 +18,7 @@ questo metodo mi ritorna dinamicamente
 il nome del servlet che ha chiamato l'applicazione
 aggiungo l'URL che deve fare la chiamata da server
  -->
-<form action="<%=application.getServletContextName() %>/musica" 
+<form action="<%=application.getServletContextName()%>/musica" 
 method="post">
 <input type="radio" name="music" value="1">Rock<br>
 <input type="radio" name="music" value="2">Ambient<br>
