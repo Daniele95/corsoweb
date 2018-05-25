@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,16 +48,32 @@ public class MusicServlet extends HttpServlet implements DAOConstants {
 	// questo metodo apre la connessione al DB e interroga 
 	// le celle che ho scritto nel database
 	// mediante il file SQL\dati.sql
-	public void init() throws ServletException {
+	public void init( ServletConfig config ) throws ServletException {
 		try {
 			// carico il driver che sta sotto lib\ojdbc8.jar
 			// il cui indirizzo l'ho salvato nell'interfaccia DAOConstants
-			Class.forName( JDBC_DRIVER );
+			//Class.forName( JDBC_DRIVER );
+
+			// oppure passo i parametri da config xml:
+			Class.forName( config.getInitParameter("JDBC_DRIVER"));
+			
+			
 			// getConnection metodo generico, se non carico un driver
 			// non so come aprire un database specifico
 			conn = DriverManager.getConnection( JDBC_URL, USERNAME, PASSWORD );
 			// creo l'istanza dello statement sulla connection
+
+			// oppure passo i parametri da config xml:
+			conn = DriverManager.getConnection( 
+					config.getInitParameter("JDBC_URL"),
+					config.getInitParameter("USERNAME"),
+					config.getInitParameter("PASSWORD")
+					);
+			// In questo caso i parametri definiti nell'interfaccia DAO
+			// diventano inutili
+			
 			stmt = conn.createStatement();
+			
 		} catch( ClassNotFoundException exc ) {
 			System.out.println( "Impossibile caricare il driver" );
 			exc.printStackTrace();
@@ -76,12 +93,16 @@ public class MusicServlet extends HttpServlet implements DAOConstants {
 		// "text/html" è il MIME, multipurpose internet main extension
 		// 2. catturo la richiesta:
 		PrintWriter out = response.getWriter();
+		
+		// leggo un context parametr da xml: questo è accessibile qualsiasi server
+	//	String param = this.getServletContext().getInitParameter( "test" );
+		
 		// 3. prendo il valore che arriva dal form jsp
 		// nome= "music", valore va da 1 a 5
 		int valore = Integer.parseInt( request.getParameter( "music" ) );
 		
 		// creo la pagina di risposta, in HTML5		
-		out.println( "<!DOCTYPE html" );
+		out.println( "<!DOCTYPE html>" );
 		out.println( "<html>" );
 		out.println( "<head>" );
 		

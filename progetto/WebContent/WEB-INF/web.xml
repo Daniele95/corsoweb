@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>progetto</display-name>
-  <!-- faccio la mappatura xml della componente Java-->
-	<servlet>
-		<servlet-name>musica</servlet-name>
-		<servlet-class>com.gft.servlet.MusicServlet</servlet-class>		
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>musica</servlet-name>
-		<url-pattern>/musica</url-pattern>
-	</servlet-mapping>
-  
+  <display-name>musica</display-name>
+  <context-param>
+    <param-name>test</param-name>
+    <param-value>prova</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>musica</servlet-name>
+    <servlet-class>com.gft.servlet.MusicServlet</servlet-class>
+    <init-param>
+      <param-name>JDBC_DRIVER</param-name>
+      <param-value>oracle.jdbc.driver.OracleDriver</param-value>
+    </init-param>
+    <init-param>
+      <param-name>JDBC_URL</param-name>
+      <param-value>jdbc:oracle:thin:@192.168.18.117:1521:ORCL</param-value>
+    </init-param>
+    <init-param>
+      <param-name>USERNAME</param-name>
+      <param-value>a1</param-value>
+    </init-param>
+    <init-param>
+      <param-name>PASSWORD</param-name>
+      <param-value>pass</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>musica</servlet-name>
+    <url-pattern>/musica</url-pattern>
+  </servlet-mapping>
 </web-app>
