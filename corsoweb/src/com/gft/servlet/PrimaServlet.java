@@ -35,7 +35,7 @@ public class PrimaServlet extends HttpServlet {
 				" id: " + i + "</h3>");
 		out.println( "</body>" );
 		out.println( "</html>" );
-		out.close();	
+		out.close();
 		
 	}
 	
