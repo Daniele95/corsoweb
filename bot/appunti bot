@@ -1,0 +1,101 @@
+
+ho una serie di metodi javascript che mi portano al form di salva prenotazione
+che però chiama PHP
+
+
+
+la funzione prenotazione è gestita in JavaScript, è il codice 
+
+https://consmilano.asimut.net/public/js/global.js?r17125-52-2
+
+basta leggerlo ed eseguire da Java il codice JavaScript
+corrispondente alla prenotazione
+
+va ad eseguire la funzione 'reservation.php'
+
+$('.newReservation').click(
+			function (event) {
+
+				var x = event.pageX - $(this).offset().left;
+				var alt = $(this).attr('alt').split(',');
+
+				var dato = alt[0];
+				var tid = alt[1];
+				var l = alt[2];
+
+				tid = (tid * 1) + ((x / pixPerHour) * 60);
+				tid = Math.round(tid / 15) * 15;
+
+				var hours = Math.floor(tid / 60);
+				var minuts = '0' + (tid - (hours * 60));
+
+				tid = hours + ':' + minuts.substring(minuts.length - 2, minuts.length);
+
+				document.mainform.action = 'reservation.php';
+				document.mainform.tid_fra.value = tid;
+				document.mainform.lokaler_id.value = l;
+				document.mainform.submit();
+
+			}
+		);
+
+
+
+
+
+
+o 'async-event.php'
+come si vede dal javascript
+https://consmilano.asimut.net/public/js/event.js?r17125-52-2
+
+ecco la funzione
+
+function saveEvent()
+{
+
+	$.ajax(
+		{
+			url: 'async-event.php',
+			data: $('.event-save').serialize() + '&action=save',
+			type: 'POST',
+			dataType: 'JSON',
+			success: function (messages) {
+				displayMessages(messages);
+			}
+		}
+	);
+
+}
+
+
+
+
+
+/event.php?
+id=0 &
+start=1527776259 &
+lokid=99 &
+
+
+dopo un po' mi ha dato 1527780600
+1527786318
+-> è il tempo in millisecondi
+dell'orario a cui vuoi prenotare l'aula!!!!
+
+
+id = 0 indica che non sto guardando una prenotazione già fatta ma
+il form prenotazioni
+
+url = https%3A//consmilano.asimut.net/public/index.php
+%3F dato %3D 20180531 %26 akt %3D visgruppe %26 id %3D 3
+
+
+url tradotto:
+
+https://consmilano.asimut.net/public/index.php?dato=20180531&akt=visgruppe&id=3
+
+E' IL LINK "TUTTE LE AULE"!!
+
+il lokid invece dipende dall'aula che stai prenotando
+
+corrisponde al rel nell'html

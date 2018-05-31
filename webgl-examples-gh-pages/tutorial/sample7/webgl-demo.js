@@ -116,11 +116,12 @@ function main() {
 
       // gl_FragColor = vec4(texelColor.rgb * vLighting, texelColor.a);
     	 
-	  // gl_FragColor =  giappone(vTextureCoord, time);
 	  
 	  vec2 centeredCoords = 2.*(vTextureCoord - .5);
 	  
-	  gl_FragColor =  tunnel(centeredCoords, time);
+	  //gl_FragColor =  tunnel(centeredCoords, time);
+	  
+	  gl_FragColor =  giappone(vTextureCoord, time);
 	 
     }
   `;
