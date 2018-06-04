@@ -1,0 +1,74 @@
+
+	
+	public static void homePage() throws Exception {
+	    try (final WebClient webClient = new WebClient()) {	    	
+	    	
+	        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+	        Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+	
+	        final String pageAsXml = page.asXml();
+	        Assert.assertTrue(pageAsXml.contains("<body class=\"topBarDisabled\">"));
+	
+	        final String pageAsText = page.asText();
+	        Assert.assertTrue(pageAsText.contains("Support for the HTTP and HTTPS protocols"));	        
+	        
+	    }
+	}	
+	public static String dataOdierna () {
+		
+		// dal file js/global.js?r17125-52-2
+		// vedo che l'elemento html event-locationgroup, se cliccato,
+		// mi restituisce un link con la data 20180531
+		
+		String t = LocalDateTime.now().toString();
+	    t = t.substring(0, 10);
+	    t = t.replace("-", "");
+	    System.out.println(t);
+	    return t;
+	}
+	
+	public static String tutteLeAule() {
+		// L'id "3" indica "tutte le aule" nei gruppi di aule (visualizzazione "visgruppe")
+		return "index.php?dato=" + dataOdierna() + "&akt=visgruppe&id=3";		
+	}
+	
+	static String readFile(String path, Charset encoding) {
+		byte[] encoded = null;
+		try {
+			encoded = Files.readAllBytes(Paths.get(path));
+		} catch (IOException e) {
+			System.out.println("impossibile leggere il file "+path);
+			e.printStackTrace();
+		}
+		return new String(encoded, encoding);
+	}
+	
+	public static String paginaNuovaPrenotazione(String aula, String orario) {
+		
+		aula = "29"; // corrisponde alla 112, vedi
+		// view-source:https://consmilano.asimut.net/public/index.php?dato=20180531&akt=visgruppe&id=3
+		orario = "1527785788";
+		
+		return 	"https://consmilano.asimut.net/public/event.php"+
+				// id=0 -> prenotazioni
+				// lokid=29 indica l'aula 112 (corrisponde al rel dell'elemento HTML),
+				// start -> è l'orario a cui prenoto, in millisecondi
+				"?id=0&start="+orario+"&lokid="+aula+"&url="+
+				// la stringa "tutte le aule" codificata
+				"https%3A//consmilano.asimut.net/public/index.php%3Fdato%3D20180531%26akt%3Dvisgruppe%26id%3D3";
+	}
+	
+	public static String  orarioAMilllisecondi (int giorno,int mese, int anno, int ora, int minuto ) {		
+		// per qualche motivo bisogna togliere 1 al mese per avere il giusto risultato
+		GregorianCalendar c = new GregorianCalendar(anno,mese-1,giorno,ora,minuto);
+		int millisecs = (int) Math.floor(c.getTimeInMillis()/1000);
+		return String.valueOf(millisecs);
+	}	
+
+	// posso anche creare un nuovo bottone e usarlo per inviare un form:
+    //HtmlElement button = (HtmlElement) page.createElement("button");
+    //button.setAttribute("type", "submit");
+    //form.appendChild(button);	
+	
+	
+	
