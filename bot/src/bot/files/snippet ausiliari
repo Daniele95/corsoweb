@@ -1,4 +1,14 @@
-
+	public static HtmlPage submitButton( HtmlPage page, String id ) {    		
+		HtmlPage p = null;
+		HtmlButton button = (HtmlButton) page.getElementById(id);
+		try {
+			p = button.click();
+		} catch (Exception e) {
+			System.out.println("impossibile schiacciare il bottone "+ button.asText());
+		}
+		return p;
+	}
+	
 	
 	public static void homePage() throws Exception {
 	    try (final WebClient webClient = new WebClient()) {	    	
