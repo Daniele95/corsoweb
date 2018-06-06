@@ -1,11 +1,13 @@
-$.ajax(
+ $.ajax(
 		{
 			url: 'async-event.php',
 			data: $('.event-save').serialize() + '&action=check',
 			type: 'POST',
 			dataType: 'JSON',
 			success: function (data) {
-
+			
+				document.getElementById("form-messages").innerHTML += "Posso salvare: " + data.userMaySaveEvent;
+			
 				eventIsProvisional = data.eventIsProvisional;
 				userMayEditEvent = data.userMayEditEvent;
 				userMaySaveEvent = data.userMaySaveEvent;
@@ -17,12 +19,6 @@ $.ajax(
 				refreshControls();
 
 				displayMessages(messages);
-
-			},
-			beforeSend: function( a,b) {
-				//console.log(data);
-			//	document.getElementById("location-description").innerHTML=   "ciaoneeee";
 			}
-			
 		}
 	);
