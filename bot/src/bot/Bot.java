@@ -1,7 +1,9 @@
 package bot;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,6 +15,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 import bot.aule.Aule;
 import bot.aule.Prenotazione;
+import java.util.concurrent.TimeUnit;
 
 public class Bot {
 
@@ -21,7 +24,7 @@ public class Bot {
 	
 	static Logger log = Logger.getLogger("com.gargoylesoftware");
 
-	public Bot() {
+	public Bot(String nomeAula, GregorianCalendar cal, int oraFine, int minutoFine) {
 		
 	    login();	
 	    
@@ -41,20 +44,15 @@ public class Bot {
 	    }
 		it.remove();
 	    */
-	    String nomeAula = "Aula 114";
-        GregorianCalendar cal = new GregorianCalendar(2018,6,7,8,15);
-        int oraFine = 9;
-        int minutoFine = 0;
 	    
-        boolean prenotazioneRiuscita = provaAEffettuarePrenotazione(nomeAula, cal, oraFine+1, minutoFine);
+        boolean prenotazioneRiuscita = provaAEffettuarePrenotazione(nomeAula, cal, oraFine, minutoFine);
         System.out.println(prenotazioneRiuscita);
         System.out.println("----------------------------------------------");
-        boolean prenotazioneRiuscita2 = provaAEffettuarePrenotazione(nomeAula, cal, oraFine+2, minutoFine);
-        System.out.println(prenotazioneRiuscita2);
-        System.out.println("----------------------------------------------");
+       
 	   
 	}
 
+	
 	public static void login() {
 		HtmlPage home;
 		try {
@@ -91,10 +89,10 @@ public class Bot {
 	}
 	
 	public static void riempiCampi (String nomeAula,GregorianCalendar cal, int oraFine, int minutoFine) {
-			fillField(paginaPrenotazione, "event-date",cal.get(Calendar.DAY_OF_MONTH)+"/"+cal.get(Calendar.MONTH)+"/"+cal.get(Calendar.YEAR));
-			fillField(paginaPrenotazione, "event-starttime",cal.get(Calendar.HOUR)+":"+cal.get(Calendar.MINUTE));
-			fillField(paginaPrenotazione, "event-endtime",oraFine+":"+minutoFine);
-			fillField(paginaPrenotazione, "event-location", nomeAula);
+		fillField(paginaPrenotazione, "event-date",cal.get(Calendar.DAY_OF_MONTH)+"/"+cal.get(Calendar.MONTH)+"/"+cal.get(Calendar.YEAR));
+		fillField(paginaPrenotazione, "event-starttime",cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE));
+		fillField(paginaPrenotazione, "event-endtime",oraFine+":"+minutoFine);
+		fillField(paginaPrenotazione, "event-location", nomeAula);
 	}
 	
 	public static boolean possoSalvare () {
@@ -120,14 +118,36 @@ public class Bot {
 			e.printStackTrace();
 		}
 	}
+
+	public static void waitUntil (int myDay, int myHour, int myMinute) {
+		  	Calendar calendar = Calendar.getInstance();        
+	        
+	        int minute = 0;
+	        int hour = 0;
+	        int day = 0;
+	    	while (day < myDay || hour < myHour || minute<myMinute) {
+	            calendar.setTime(new Date());
+	            day = calendar.get(Calendar.DAY_OF_MONTH);
+	            hour = calendar.get(Calendar.HOUR_OF_DAY);
+	            minute = calendar.get(Calendar.MINUTE);
+	    		try {
+					TimeUnit.SECONDS.sleep(5);
+				} catch (InterruptedException e) {e.printStackTrace();}
+	    		System.out.println(calendar.get(Calendar.YEAR) + "/"+calendar.get(Calendar.MONTH) + "/" + day + " - " + hour + ":" + minute);
+	    	}
+	    	
 		
+	}
 	
-
+	
     public static void main(final String[] args) {
-
-        log.setLevel(Level.OFF);
-        new Bot();         
-       
+    	
+    	log.setLevel(Level.OFF);
+      
+    	waitUntil(7,16,01);
+    	new Bot("Aula 122",new GregorianCalendar(2018,6,9,14,00),16,00);
+        
+    	
     }
 
 }

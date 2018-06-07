@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Form</title>
+<script src="js/javascriptForm.js" type="text/javascript"></script>
+</head>
+<body>
+	<form action="/formSubmit.php">
+		<label for="nome">Nome:</label>
+		 <input type="text" id="nome" name="nome" value="Lucio">
+		 <label for="cognome">Cognome:</label>
+		<input type="text" id="cognome" name="cognome" value="Benfante">
+		<input type="checkbox" id="fgender" name="gender" value="female" checked><label for="fgender">F</label>
+		<input type="checkbox" id="mgender" name="gender" value="male"><label for="mgender">M</label>
+		<input type="submit" value="Invia" />
+		<button id="cleaner">Ripulisci</button>
+	</form>
+	<div id="errors"></div>
+</body>
+</html>

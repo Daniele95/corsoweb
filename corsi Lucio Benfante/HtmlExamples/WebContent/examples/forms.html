@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Forms example</title>
+</head>
+<body>
+	<div>
+		<a href="../index.html">Home</a>
+	</div>
+
+	<h1>Simple form</h1>
+	<form action="http://192.168.16.107:8081/v1/echo?nome=12" method="POST">
+		<div>
+			<label for="mioUsername">Username:</label>
+			 <input id="mioUsername"
+				name="username" type="text" value="lucio" placeholder="username">
+		</div>
+		<div>
+			<label for="mioUsername2">Username:</label>
+			 <input id="mioUsername2"
+				name="nome" type="text" value="lucio" placeholder="username">
+		</div>
+		<input type="submit" name="action" value="Salva"> <input
+			type="submit" name="action" value="Cancella">
+	</form>
+
+
+	<h1>Forms example</h1>
+	<form action="http://localhost:8081/v1/echo" method="GET">
+		<div>
+			<label for="usernameField">Username:</label> <input
+				id="usernameField" type="text" name="username" value="Benfante2"
+				placeholder="Username" autocomplete="off" maxlength="25"
+				pattern="^[A-Z].*[0-9]$" />
+		</div>
+		<div>
+			<label for="passwordField">Password:</label> <input
+				id="passwordField" type="password" name="password" />
+		</div>
+		<div>
+			<label for="nomeField">Nome:</label> <input id="nomeField"
+				type="text" name="nome" />
+		</div>
+		<div>
+			<label for="cityField">Città di residenza:</label>
+			
+			
+			<select	id="cityField" name="city">
+				<option value="01">Milano</option>
+				<option value="02">Roma</option>
+				<option value="05" selected>Verona</option>
+				<option value="03">Napoli</option>
+				<option value="04">Palermo</option>
+			</select>
+			
+			
+		</div>
+		<div>
+			<label for="cityWorkField">Città di lavoro:</label>
+			
+			 <select id="cityWorkField" name="cityWork" multiple>
+				<option value="01" selected>Milano</option>
+				<option value="02">Roma</option>
+				<option value="05" selected>Verona</option>
+				<option value="03">Napoli</option>
+				<option value="04">Palermo</option>
+			</select>
+			
+			
+		</div>
+		<div>
+			<input id="femaleRadio" type="radio" name="gender" value="female"
+				 /> <label for="femaleRadio">Femmina</label>
+			<input id="maleRadio" type="radio" name="gender" value="male" /> <label
+				for="maleRadio">Maschio</label>
+		</div>
+		<div>
+			<input id="foodMeat" type="checkbox" name="foodPreference"
+				value="meat" checked /> <label for="foodMeat">Carne</label>
+				 <input
+				id="foodFish" type="checkbox" name="foodPreference" value="fish" />
+			<label for="foodFish">Pesce</label>
+			 <input id="foodVegetables"
+				type="checkbox" name="foodPreference" value="vegetables" /> <label
+				for="foodVegetables">Verdura</label>
+		</div>
+		<div>
+			<label for="birthdateField">Data di nascita:</label> <input
+				id="birthdateField" type="date" name="birthDate"
+				placeholder="Birthdate" />
+		</div>
+		<div>
+			<label for="arrivalField">Ora di arrivo:</label> <input
+				id="arrivalField" type="time" name="arrival" placeholder="Arrival" />
+		</div>
+		<div>
+			<label for="ageField">Età:</label> <input id="ageField" type="number"
+				name="age" placeholder="Age" min=10 max=140 step=2 />
+		</div>
+		<div>
+			<label for="age2Field">Età:</label> <input id="age2Field"
+				type="range" name="age2" placeholder="Age" min=10 max=140 />
+		</div>
+		<div>
+			<label for="emailField">E-mail:</label> <input id="emailField"
+				type="email" name="email" placeholder="E-mail" />
+		</div>
+		<div>
+			<label for="wwwField">Sito Web:</label> <input id="wwwField"
+				type="url" name="web" placeholder="WWW" />
+		</div>
+		<div>
+			<label for="comments">Commenti:</label>
+			<textarea id="comments" name="comments" rows="4" cols="40">Valore iniziale della textarea</textarea>
+		</div>
+		<div>
+			<input type="submit" value="Invia" />
+		</div>
+	</form>
+</body>
+</html>

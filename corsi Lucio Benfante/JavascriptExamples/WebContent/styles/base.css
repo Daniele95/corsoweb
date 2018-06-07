@@ -1,0 +1,152 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Joti+One|Roboto|Source+Sans+Pro');
+
+:root {
+	box-sizing: border-box;
+	font-size: 12px;
+	font-family: 'Source Sans Pro', sans-serif;
+	margin: 0;
+	padding: 0;
+/* 	font-family: 'Roboto', sans-serif; */
+/* 	font-family: 'Joti One', cursive; */
+}
+
+*,
+::before,
+::after {
+	box-sizing: inherit;
+}
+
+body {
+	padding: 0;
+	margin: 0;	
+}
+
+header {
+	font-size: 2rem;
+	padding: 0;
+	margin: 0;
+	width: calc(100%+2px);
+	background-color: rgba(255, 0, 0, 0.8);
+	color: white;
+}
+
+header a:link,
+header a:visited,
+header a:hover,
+header a:active {
+	color: white;
+	text-decoration: none;	
+} 
+
+header .menuZone {
+	font-size: 1.3rem;
+}
+
+header .menuZone ul {
+	margin: 1rem;
+	padding: 0;
+}
+	
+header .menuZone li  a {
+	display: block;
+	width: 10em;
+	height: 1.5em;
+	vertical-align: middle;
+	line-height: 1.5em;
+	text-align: center;
+	background-color: white;
+	color: red;
+	border-radius: 0.5em;
+	box-shadow: 2px 2px rgba(0,0,0,0.3);
+	margin: 2px 2px;
+	transition-property: border-radius, transform;
+	transition-duration: 5s;
+}
+
+header .menuZone li  a:hover {
+	color: white;
+	background-image: linear-gradient(to top, red, white);
+	transform: translateY(5px);
+	box-shadow: 0px 0px rgba(0,0,0,0.2);
+	border-radius: 1em;
+}
+
+header .menuZone li  a:active {
+	color: white;
+	background-color: red; 
+}
+
+.logo, .title {
+	display: inline-block;
+	height: 4rem;
+	line-height: 4rem;
+	vertical-align: middle;
+	padding: 0px 1em;
+	margin: 0;
+}
+
+.logo {
+	width: 4em;	
+}
+
+.title {
+	width: calc(100%-4em);
+}
+footer {
+	font-size: 0.8rem;
+}
+
+.logo {
+	font-family: 'Joti One', cursive;
+	font-size: 3rem;
+	text-align: center;
+}
+
+header div.mainMenu {
+	display: inline-block;
+}
+
+header div.mainMenu li {
+	list-style: none;
+	display: inline-block;
+}
+
+header div.mainMenu ul > li > ul  {
+	display: none;
+}
+
+header div.helpMenu {
+	display: inline-block;
+	overflow: hidden;
+	position: absolute;
+    right: 0.5em;
+    top: 0.5em;	
+}
+
+header div.helpMenu::after {
+	position: absolute;
+	text-indent: 0;
+	top: 1em;
+	right: 1em;
+	content: '?';
+}
+
+footer {
+	background-color: black;
+	color: white;
+	padding: 0.5rem 0px; 
+}
+
+footer div.copyright {
+	display: inline-block;
+}
+
+footer div.contacts {
+	display: inline-block;
+}
+
+div.mainContent {
+	display: block;
+	min-height: calc(100vh - 10.3rem);
+}

@@ -1,0 +1,4 @@
+com\benfante\examples\echoservices\controllers\EchoController.class
+com\benfante\examples\echoservices\filters\SimpleCorsFilter.class
+com\benfante\examples\echoservices\SwaggerConfig.class
+com\benfante\examples\echoservices\EchoServiceApplication.class

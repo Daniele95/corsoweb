@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<form action = "/v1/echo" method="post">
+
+<input type = "hidden" name="redirect" value="/form.html" />
+
+<div>
+<label for="usernameId">Username: </label>	<input id="usernameId" name="nome" />
+</div>
+
+<div>
+<label for="passwordId">Password: </label>	<input id="passwordId" type="password" name="password" />
+</div>
+
+<div>
+<label>Regione residenza:</label>
+<select id="regioneResidenza" name="regioneResidenza"></select>
+</div>
+
+<input type="submit" />
+
+
+</form>
+
+
+</body>
+</html>

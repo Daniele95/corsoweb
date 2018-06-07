@@ -1,0 +1,77 @@
+let nameChangeHandler = function(e) {
+	let errors = document.querySelector("#errors")
+	if (e.target.value.length > 20) {
+		errors.textContent="La lunghezza del nome deve essere inferiore a 20"
+	}
+}
+
+let clickAlertHandler = function(e) {
+	alert("E' stato premuto l'elemento "+e.target)
+//	e.preventDefault()
+//	e.stopPropagation()
+}
+
+let clearForm = function(e) {
+	e.preventDefault()
+	let textInputs = document.querySelectorAll("form input[type='text']")
+	textInputs.forEach((item) => { item.value = "" })
+	let checkboxInputs = document.querySelectorAll("form input[type='checkbox']")
+	checkboxInputs.forEach((item) => { item.checked = false })
+}
+
+let sendForm = function(e) {
+	document.getElementById("debug").innerHTML="ciao"
+	e.preventDefault()
+	let fd = new FormData(e.target)
+	
+	let XHR = new XMLHttpRequest()
+	
+	XHR.addEventListener("load", function(xe) {
+		if (xe.target.status === 200) {
+			alert(xe.target.responseText)
+			console.log("Dopo la ricezione della risposta")
+		} else {
+			console.error(xe.target)
+		}
+	})
+
+	XHR.addEventListener("error", function(xe) {
+		console.error("Errore invocando il servizio 	")
+	})
+	
+//	XHR.open("POST", "http://localhost:8081/v1/echo2")
+	
+	
+//	XHR.send(fd)
+		
+	console.log("Form inviata!")
+}
+
+window.addEventListener("load", function() {	
+	let inputName = document.querySelector("input[name='nome']")
+	inputName.addEventListener("change", nameChangeHandler)
+	
+	inputName.addEventListener("keyup", function(e) {
+		let errors = document.querySelector("#errors")
+		
+		var random = Math.random()*10
+		random = Math.floor(random)
+		if (parseInt(e.target.value) == random)
+			document.getElementById("debug").innerHTML = "bravo " + random + "<br>"
+			else document.getElementById("debug").innerHTML += "cattivo " + random+"<br>"
+		
+				
+	})
+//	inputName.addEventListener("focus", function(e) {
+//		alert("Compila il campo " + e.target.name)
+//	})
+	let labelName = document.querySelector("label[for='nome']")
+//	labelName.addEventListener("click", clickAlertHandler)
+//	document.querySelector("body").addEventListener("click", clickAlertHandler)
+	
+	document.querySelector("input[type='submit']").addEventListener("click", clickAlertHandler)
+	
+	document.querySelector("#cleaner").addEventListener("click", clearForm)
+	
+	document.querySelector("form").addEventListener("submit", sendForm)
+})
