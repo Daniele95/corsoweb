@@ -4,7 +4,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -15,7 +14,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 
 import bot.aule.Aule;
 import bot.aule.Prenotazione;
-import java.util.concurrent.TimeUnit;
 
 public class Bot {
 
@@ -56,7 +54,7 @@ public class Bot {
 	public static void login() {
 		HtmlPage home;
 		try {
-			home = webClient.getPage("https://consmilano.asimut.net/public/login.php");   
+			home = (HtmlPage) webClient.getPage("https://consmilano.asimut.net/public/login.php");   
 		    fillField(home, "authenticate-useraccount","tsimur.shved@studenti.consmilano.it");
 		    ((HtmlElement) home.getElementById("authenticate-password")).type("temporanea");			
 			home.executeJavaScript("submitLoginForm()");
@@ -134,18 +132,16 @@ public class Bot {
 					TimeUnit.SECONDS.sleep(5);
 				} catch (InterruptedException e) {e.printStackTrace();}
 	    		System.out.println(calendar.get(Calendar.YEAR) + "/"+calendar.get(Calendar.MONTH) + "/" + day + " - " + hour + ":" + minute);
-	    	}
-	    	
-		
+	    	}	    	
 	}
 	
 	
     public static void main(final String[] args) {
     	
-    	log.setLevel(Level.OFF);
+    //	log.setLevel(Level.OFF);
       
-    	waitUntil(7,16,01);
-    	new Bot("Aula 122",new GregorianCalendar(2018,6,9,14,00),16,00);
+    //	waitUntil(7,16,01);
+    //	new Bot("Aula 122",new GregorianCalendar(2018,6,9,14,00),16,00);
         
     	
     }
