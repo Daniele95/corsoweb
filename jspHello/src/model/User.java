@@ -1,15 +1,18 @@
+package model;
 
 public class User {
 	private int id;
+	private String firstName;
+	private String lastName;
+	private int age;
+	
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	private String firstName;
-	private String lastName;
-	private String age;
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -22,11 +25,11 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public String getAge() {
+	public int getAge() {
 		return age;
 	}
-	public void setAge(String age) {
-		this.age = age;
+	public void setAge(int i) {
+		this.age = i;
 	}
 	
 }

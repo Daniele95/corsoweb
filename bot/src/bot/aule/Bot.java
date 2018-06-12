@@ -1,4 +1,4 @@
-package bot;
+package bot.aule;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,9 +11,6 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
-
-import bot.aule.Aule;
-import bot.aule.Prenotazione;
 
 public class Bot {
 
@@ -141,7 +138,7 @@ public class Bot {
     //	log.setLevel(Level.OFF);
       
     //	waitUntil(7,16,01);
-    //	new Bot("Aula 122",new GregorianCalendar(2018,6,9,14,00),16,00);
+    	new Bot("Aula 114",new GregorianCalendar(2018,6,13,14,00),16,00);
         
     	
     }

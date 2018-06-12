@@ -22,6 +22,13 @@
   
   <welcome-file-list>
     <welcome-file>hello.jsp</welcome-file>
+    <welcome-file>edit.jsp</welcome-file>
+    
   </welcome-file-list>
   
+  
+  
+   <session-config>
+    <session-timeout>0</session-timeout>
+  </session-config> 
 </web-app>

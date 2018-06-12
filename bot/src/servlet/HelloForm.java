@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bot.Bot;
+import bot.aule.Bot;
 
 // Extend HttpServlet class
 public class HelloForm extends HttpServlet {
@@ -29,8 +29,12 @@ public class HelloForm extends HttpServlet {
 	      
 	      int oraInizio = Integer.parseInt(request.getParameter("first_name"));
 	      System.out.println(oraInizio);
-	      
-	    //  new Bot("Aula 122",new GregorianCalendar(2018,6,9,oraInizio,00),16,00);
+	      try {
+		      new Bot("Aula 114",new GregorianCalendar(2018,6,13,oraInizio,00),16,00);
+	    	  
+	      } catch (Exception e) {
+	    	  out.println(e.getStackTrace());
+	      }
 	      
 	      out.println(docType +
 	         "<html>\n" +
