@@ -16,12 +16,10 @@ import model.User;
 public class UsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private UserDAO userDAO;
-     
+    private String idToRemove;
+    
     public UsersServlet() {
         super();
-        // nota bene: errore: a questo punto il contesto ancora non esiste! 
-        // sto creando la servlet, sono all'inizio dell'applicazione
-        // quindi non posso mettere qui la daoFactory
     }
 
 	@Override
@@ -35,17 +33,25 @@ public class UsersServlet extends HttpServlet {
 		super.init(config);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		List<User> users =(List<User>)this.getServletContext().getAttribute("userDb");
-	//	request.setAttribute("userDb", users);
-		request.setAttribute("userDb", this.userDAO.findAll());
+		List<User> users = this.userDAO.findAll();		
+		request.setAttribute("userDb", users);
 		request.getRequestDispatcher("/WEB-INF/jsp/user/list.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
+		List<User> users = this.userDAO.findAll();
+		
+		this.idToRemove = request.getParameter("remove");		
+		if(this.idToRemove==null) {}
+		else {
+			users.remove(Integer.parseInt(idToRemove));
+			this.userDAO.resetIndices();
+		}
+		
+		request.setAttribute("userDb", users);
+		request.getRequestDispatcher("/WEB-INF/jsp/user/list.jsp").forward(request, response);
+		}
 
 
 }

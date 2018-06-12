@@ -15,8 +15,7 @@
 	<div>
 		<label for="firstName">First name: </label>
 		<input type="text" id="firstName" name="firstName" value="${user.firstName}"/>
-		<!-- user.firstName sta per ((User)request.getAttribute("user")).getFirstName()
-		è detto expression language -->
+
 	</div>
 	<div>
 		<label for="lastName">Last name: </label>

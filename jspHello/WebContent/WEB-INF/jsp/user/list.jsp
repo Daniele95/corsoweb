@@ -23,7 +23,6 @@
 	List<User> users = (List<User>)request.getAttribute("userDb");
 %>
 
-
 <%
 	if (users != null && !users.isEmpty()) {
 %>
@@ -35,10 +34,14 @@
 
 <li>
 	<!--   user.getId() nei bracket diventa user.id -->
-	<a href="${ctx}/user?id=${user.id}"> 
+	<a href="${ctx}/user?id=${user.id}">
 		${user.firstName}&nbsp;${user.lastName}
 	</a>
-		(${user.age})
+		(${user.age}) &nbsp;&nbsp;&nbsp;
+	<form action="${ctx}/users" method="post">
+  		<button type="submit" name="remove" value="${user.id}" class="btn-link">X</button>
+	</form>
+		
 </li>
 <%
 	}

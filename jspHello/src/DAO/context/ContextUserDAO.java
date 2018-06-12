@@ -9,39 +9,54 @@ import javax.servlet.ServletContext;
 import DAO.UserDAO;
 import model.User;
 
-// qua dentro metto tutti i metodi che accedono ai miei dati
-
-
 public class ContextUserDAO implements UserDAO {
 
 	private ServletContext context;
 	
-	public ContextUserDAO( ServletContext context) {
+	public ContextUserDAO(ServletContext context) {
 		this.context = context;
-	}	
-	
-	@Override
-	public List<User> findAll() {
-		return this.getUserDb();	
-	}
-
-	@Override
-	public User findId(int it) {
-		return null;
 	}
 	
-	private User findUserById(int id) {
-		List<User>  users = getUserDb();
-		Iterator<User> it = users. iterator();
+	@Override
+	public User findUserById(int id) {
+		List<User> users = getUserDb();
+		Iterator<User> it = users.iterator();
 		while(it.hasNext()) {
 			User dbUser = (User)it.next();
 			if(dbUser.getId() == id )
 				return dbUser;
-		}	
+		}
 		return null;
 	}
-
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public int generateId() {
+		List<User> users = (List<User>) this.context.getAttribute("userDb");
+		if (!users.isEmpty())
+			return users.size();
+		else
+			return 0;
+	}
+	
+	public void resetIndices() {
+		List<User> users = getUserDb();
+		Iterator<User> it = users.iterator();
+		int i = 0;
+		while(it.hasNext()) {
+			User dbUser = (User)it.next();
+			dbUser.setId(i);
+			i++;
+		}
+		this.context.setAttribute("userDb", users);
+	}
+	
+	@Override
+	public List<User> findAll() {
+		return this.getUserDb();
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<User> getUserDb() {
 		List<User> users = (List<User>) this.context.getAttribute("userDb");
 		if(users == null) {
@@ -51,25 +66,9 @@ public class ContextUserDAO implements UserDAO {
 		return users;
 	}
 	
-	private int generateId(User user) {
-		List<User> users = getUserDb();
-		User dbUser = findId(user.getId());
-		return dbUser.getId();
-	}
-	
 	@Override
-	public User save(User user) {
-		List<User> users = getUserDb();
-		User dbUser = findId(user.getId());
-		if(dbUser != null) {
-			dbUser.setFirstName(user.getFirstName());
-			dbUser.setLastName(user.getLastName());
-			dbUser.setAge(user.getAge());			
-			return dbUser;
-		} else {
-			user.setId(user.getId());
-		}
-		return dbUser;
+	public void save(List<User> users) {
+		this.context.setAttribute("userDb",users);
 	}
 
 }

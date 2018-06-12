@@ -1,0 +1,52 @@
+progetto jspHello
+
+UserDAO:
+
+
+creo un interfaccia tale che mi permette di ridurre
+getServletContext();
+a
+userDAO.context;
+cioè faccio la chiamata al livello dati mediante questo oggetto
+che in questo caso il database è l'attributo userDb del contesto del servlet
+(che morirà quando terminerò l'applicazione, poiché in quel momento viene distrutta
+la servlet)
+ma potrebbe contenere un SQL, o la scrittura su file,
+o qualsiasi altro tipo di storage dati
+
+
+
+UserServlet: istanzio il DAO
+
+questo cambierà se metterò i dati in un database invece che nell'attuale ServletContext
+ECCO A COSA SERVE L'INTERFACCIA: chiamo UtenteDAO e DAOFactory
+non faccio mai riferimento a classi
+che le implementano
+questo potrebbe essere un contextDAOFActory, ma anche un mySqlDAOFactory,
+insomma qualsiasi DAOFactory!! è questa la comodità,
+il livello Servlet non si preoccupa di chi crea l'oggetto DAO e cioè di che forma abbiano i dati sottostanti!!
+questa la potenza dell'INTERFACCIA
+così riduco la concorrenza, costruisco un solo utente DAO (così non devo 
+chiamare più volte la daoFactory, che può essere costoso)
+
+
+mi collego al database daofactory
+invece che specificare un particolare modo di salvare i dati
+
+
+
+UsersServlet:
+non chiamo il DAO nel costruttore, ma nell'init!
+
+nota bene: errore: a questo punto il contesto ancora non esiste! 
+sto creando la servlet, sono all'inizio dell'applicazione
+quindi non posso istanziare qui la daoFactory
+
+devo chiamarla nell'init()
+
+
+
+edit.jsp e list.jsp:
+
+${user.firstName} sta per <%((User)request.getAttribute("user")).getFirstName()%>
+è detto expression language
