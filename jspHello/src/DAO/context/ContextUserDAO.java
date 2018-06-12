@@ -48,7 +48,7 @@ public class ContextUserDAO implements UserDAO {
 			users = new ArrayList<>();
 			this.context.setAttribute("userDb",users);
 		}
-		return null;
+		return users;
 	}
 	
 	private int generateId(User user) {
