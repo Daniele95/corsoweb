@@ -1,0 +1,11 @@
+<%
+String message = (String)pageContext.findAttribute("message");
+if (message != null) {
+%>
+<div style="background-color: lightblue; color: black;border: 1px solid gray; margin: 10px; padding: 10px;">
+	${message}
+</div>
+<%
+	pageContext.removeAttribute("message");
+}
+%>
