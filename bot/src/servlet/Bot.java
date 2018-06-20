@@ -1,4 +1,4 @@
-package bot.aule;
+package servlet;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,6 +11,9 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+
+import bot.aule.Aule;
+import bot.aule.Prenotazione;
 
 public class Bot {
 
@@ -132,7 +135,7 @@ public class Bot {
 	    	}	    	
 	}
 	
-	
+	/*
     public static void main(final String[] args) {
     	
     //	log.setLevel(Level.OFF);
@@ -142,5 +145,5 @@ public class Bot {
         
     	
     }
-
+*/
 }

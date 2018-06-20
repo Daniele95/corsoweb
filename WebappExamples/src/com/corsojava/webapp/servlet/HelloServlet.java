@@ -14,12 +14,9 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class HelloServlet
  */
-/*
- * @WebServlet( urlPatterns = { "/hello" }, initParams = {
- * 
- * @WebInitParam(name = "defaultName", value = "Marco", description =
- * "il nome usato dalla servlet per salutare.") })
- */
+// @WebServlet(urlPatterns = { "/hello" }, initParams = {
+// @WebInitParam(name = "defaultName", value = "Lucio", description = "dfsdfsd")
+// })
 public class HelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +25,7 @@ public class HelloServlet extends HttpServlet {
 	 */
 	public HelloServlet() {
 		super();
-
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -36,7 +33,7 @@ public class HelloServlet extends HttpServlet {
 	 */
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-
+		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -45,23 +42,22 @@ public class HelloServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		logCookies(request);
 		String name = request.getParameter("name");
 		HttpSession session = request.getSession(true);
 		if (name == null) {
 			name = (String) session.getAttribute("name");
 			if (name == null) {
-			name = this.getServletConfig().getInitParameter("defaultName");
+				name = this.getServletConfig().getInitParameter("defaultName");
 			}
-		}else {
+		} else {
 			session.setAttribute("name", name);
 			Cookie cookie = new Cookie("myName", name);
 			cookie.setMaxAge(20*60);
 			response.addCookie(cookie);
 		}
 		request.setAttribute("user", name);
-		request.getRequestDispatcher("/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/jsp/index.jsp").forward(request, response);
 	}
 
 	/**
@@ -70,15 +66,14 @@ public class HelloServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
 	private void logCookies(HttpServletRequest req) {
-
 		Cookie[] cookies = req.getCookies();
 		if (cookies != null) {
-			for (Cookie c : req.getCookies()) {
+			for (Cookie c : cookies) {
 				this.log(c.getName() + " " + c.getValue() + " " + c.getPath() + " " + c.getMaxAge());
 			}
 		}
